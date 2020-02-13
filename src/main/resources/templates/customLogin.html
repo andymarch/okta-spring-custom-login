@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Login</title>
+</head>
+<body>
+    <form action="#" th:action="@{/customLogin}" th:object="${credentials}" method="post">
+        <input id="user" th:field="*{user}"/>
+        <input id="password" type="password" th:field="*{pword}"/>
+        <button type="submit">Go!</button>
+    </form>
+</body>
+</html>
