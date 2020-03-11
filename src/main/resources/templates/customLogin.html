@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Custom Login</title>
+    <title>Custom UI Demonstration</title>
 </head>
 <body>
+    <h1>Custom UI Demonstration</h1>
     <form action="#" th:action="@{/customLogin}" th:object="${credentials}" method="post">
+        <label for="user">Username</label>
         <input id="user" th:field="*{user}"/>
+        <label for="password">Password</label>
         <input id="password" type="password" th:field="*{pword}"/>
-        <button type="submit">Go!</button>
+        <button type="submit">Login</button>
     </form>
 </body>
 </html>

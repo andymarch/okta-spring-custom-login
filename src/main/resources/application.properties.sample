@@ -1,0 +1,5 @@
+okta.oauth2.issuer=https://{{your-okta-tenant}/oauth2/default
+okta.oauth2.clientId={{your-client-id}}
+okta.oauth2.clientSecret={{your-client-secret}}
+
+okta.domain=https://{{your-okta-tenant}}

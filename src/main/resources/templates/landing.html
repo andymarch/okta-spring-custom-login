@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -10,5 +10,8 @@
 </head>
 <body>
 <h1>Custom UI Demonstration</h1>
+
+<span th:if="${user != null}">Welcome <span th:text="${user.attributes.name}">user</span>.</span>
+<span th:if="${user == null}"><a href="/customLogin">Login</a></span>
 </body>
 </html>

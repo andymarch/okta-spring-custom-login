@@ -6,14 +6,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.security.Principal;
-
-@RestController
+@Controller
 @SpringBootApplication
 public class Application {
 
@@ -22,18 +23,12 @@ public class Application {
     }
 
     @GetMapping("/")
-    public String landing(Principal principal) {
-        return "Hey there!";
-    }
-
-    @GetMapping("/protected")
-    public String email(Principal principal) {
-        return "Hey there! Your email address is: " + principal.getName();
+    public ModelAndView displayLandingPage(@AuthenticationPrincipal OidcUser principal) {
+        ModelAndView mav = new ModelAndView("landing");
+        if(principal != null) {
+            mav.addObject("user",(DefaultOidcUser)principal);
         }
-
-    @RequestMapping("/customLogin")
-    public String customLogin(Principal principal) {
-        return "customLogin.html";
+        return mav;
     }
 
     @Configuration
@@ -41,7 +36,6 @@ public class Application {
 
         @Autowired
         ClientRegistrationRepository clientRegistrationRepository;
-
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
